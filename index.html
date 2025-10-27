@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南京汤山玖捌贰·非遗潮创馆招商H5</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+        
+        :root {
+            --primary-color: #333333;
+            --secondary-color: #D4AF37; /* 金色 */
+            --gold-light: #FFD700;
+            --gold-dark: #B8860B;
+            --gold-darker: #8B6914;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            font-family: "KaiTi", "STKaiti", "SimKai", serif;
+            color: var(--primary-color);
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+            /* 华丽金色背景 */
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 40% 40%, rgba(184, 134, 11, 0.25) 0%, transparent 50%),
+                linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(212, 175, 55, 0.25) 50%, rgba(139, 105, 20, 0.15) 100%);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        .content-bg {
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
+        }
+        
+        .header-gradient {
+            height: 8px;
+            background: linear-gradient(90deg, var(--gold-darker), var(--gold-dark), var(--gold-light), var(--gold-dark), var(--gold-darker));
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
+        }
+        
+        .divider {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold-light), var(--gold-dark), transparent);
+            margin: 60px auto;
+            position: relative;
+        }
+        
+        .divider::before, .divider::after {
+            content: '❖';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold-light);
+            font-size: 12px;
+        }
+        
+        .divider::before {
+            left: -15px;
+        }
+        
+        .divider::after {
+            right: -15px;
+        }
+        
+        .img-frame {
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .img-frame:hover {
+            border-color: rgba(212, 175, 55, 0.7);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+            transform: scale(1.02);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
+            color: var(--white);
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 32px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            font-size: 28px;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            border-radius: 2px;
+        }
+        
+        p, li {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .mobile-menu {
+            transform: scaleY(0);
+            transform-origin: top;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        /* 图片动画效果 */
+        .gallery-image {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-image.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 图片模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--gold-light);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .modal-nav-btn {
+            background-color: rgba(212, 175, 55, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .modal-nav-btn:hover {
+            background-color: rgba(212, 175, 55, 1);
+            transform: scale(1.1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(212, 175, 55, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(212, 175, 55, 1);
+            transform: scale(1.1);
+        }
+
+        /* 新增动画效果 */
+        .logo-float {
+            animation: float 3s ease-in-out infinite;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
+            border: 3px solid var(--gold-light);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(212, 175, 55, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 市场分析模块样式 */
+        .data-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            padding: 24px;
+            height: 100%;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .data-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .data-number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .data-label {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: 8px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--gold-dark), var(--gold-light));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--secondary-color);
+        }
+
+        .feature-card {
+            transition: all 0.4s ease;
+            border-left: 4px solid transparent;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .feature-card:hover {
+            border-left-color: var(--secondary-color);
+            transform: translateX(8px);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* 新增华丽元素 */
+        .gold-border {
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        
+        .gold-text {
+            color: var(--secondary-color);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .gold-bg {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 215, 0, 0.15));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .gold-shadow {
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* 添加华丽背景装饰 */
+        .gold-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 30% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 25%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* 地理位置部分特殊样式 */
+        .location-highlight {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--gold-light);
+            transition: all 0.3s ease;
+        }
+        
+        .location-highlight:hover {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent);
+            transform: translateX(5px);
+        }
+        
+        /* 导航栏增强 */
+        nav {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold-light));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--gold-dark);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 标签样式增强 */
+        .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* 联系表单增强 */
+        .contact-item {
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .contact-item:hover {
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 金色背景装饰 -->
+    <div class="gold-pattern"></div>
+    
+    <div class="header-gradient"></div>
+
+    <!-- 金色粒子效果 -->
+    <div id="particles"></div>
+
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 z-50 bg-white gold-border">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold gold-text flex items-center">
+                <i class="fas fa-landmark mr-2"></i>
+                玖捌贰·非遗潮创馆
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#intro" class="nav-link text-gray-800">展馆介绍</a>
+                <a href="#market" class="nav-link text-gray-800">市场分析</a>
+                <a href="#location" class="nav-link text-gray-800">地理位置</a>
+                <a href="#gallery" class="nav-link text-gray-800">展馆效果图</a>
+                <a href="#cooperation" class="nav-link text-gray-800">合作模式</a>
+                <a href="#food" class="nav-link text-gray-800">小吃摊位</a>
+            </div>
+            <button id="mobileMenuBtn" class="md:hidden text-gray-800 bg-gold-100 p-2 rounded-lg transition-all duration-300 hover:bg-gold-200">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="mobile-menu absolute w-full bg-white shadow-lg md:hidden gold-border">
+            <div class="container mx-auto px-4 py-2">
+                <a href="#intro" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">展馆介绍</a>
+                <a href="#market" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">市场分析</a>
+                <a href="#location" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">地理位置</a>
+                <a href="#gallery" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">展馆效果图</a>
+                <a href="#cooperation" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">合作模式</a>
+                <a href="#food" class="block py-3 px-4 text-gray-800 hover:gold-bg rounded-lg transition-all duration-300">小吃摊位</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="hero" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h1 class="text-4xl font-bold mb-6 gold-text">玖捌贰·非遗潮创馆</h1>
+                        <p class="mb-8 text-lg">
+                            传统非遗与现代潮流的完美融合<br>
+                            现面向全国招募30家优质非遗商户
+                        </p>
+                        <a href="#contact" class="btn inline-block py-4 px-10 rounded-full text-lg">
+                            <i class="fas fa-handshake mr-2"></i>立即咨询
+                        </a>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="logo-float w-56 h-56 mx-auto">
+                            <img src="https://space.coze.cn/s/UJzmx90fzyQ/" alt="玖捌贰·非遗潮创馆logo" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 展馆介绍 -->
+    <section id="intro" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">展馆介绍</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">传统与创新的交汇点</h3>
+                        <p class="mb-6 text-lg">
+                            玖捌贰·非遗潮创馆位于江苏省南京市江宁区汤山街道迎宾路28号，占地面积1016平方米，是一个融合传统非遗文化与现代潮流元素的创新空间。
+                        </p>
+                        <p class="mb-8 text-lg">
+                            我们致力于为非遗传承人提供一个展示、交流和商业化的平台，同时为消费者带来独特的文化体验和创意产品。
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tag gold-bg gold-text">非遗文化</span>
+                            <span class="tag gold-bg gold-text">创意设计</span>
+                            <span class="tag gold-bg gold-text">商业空间</span>
+                            <span class="tag gold-bg gold-text">文化交流</span>
+                            <span class="tag gold-bg gold-text">国潮市集</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="img-frame">
+                            <img src="https://space.coze.cn/s/IP2dFQELXnA/?width_height=2238x1280" alt="一楼门面图片" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 市场分析模块 -->
+    <section id="market" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">市场分析</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+                <p class="text-lg max-w-2xl mx-auto">深入洞察非遗消费市场，把握文化消费新机遇</p>
+            </div>
+            
+            <div class="card p-10 max-w-6xl mx-auto content-bg">
+                <!-- 宏观市场数据 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center gold-text">宏观市场数据</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="data-card text-center">
+                            <div class="data-number">1.5亿+</div>
+                            <div class="data-label">南京年接待游客</div>
+                        </div>
+                        <div class="data-card text-center">
+                            <div class="data-number">3000亿+</div>
+                            <div class="data-label">南京旅游年收入</div>
+                        </div>
+                        <div class="data-card text-center">
+                            <div class="data-number">68%</div>
+                            <div class="data-label">非遗线上销售增长</div>
+                        </div>
+                        <div class="data-card text-center">
+                            <div class="data-number">800亿+</div>
+                            <div class="data-label">非遗文创市场规模</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h4 class="text-lg font-bold mb-4">非遗消费市场趋势</h4>
+                            <p class="mb-4">近年来，非遗消费市场呈现爆发式增长，主要驱动力包括：</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>国潮文化兴起，年轻人对传统文化认同感增强</li>
+                                <li>消费升级推动体验式、文化型消费需求增长</li>
+                                <li>政策支持文化产业发展，非遗保护力度加大</li>
+                                <li>数字化技术为非遗传播和销售开辟新渠道</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="chart-container">
+                                <canvas id="marketTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 消费者洞察 -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-center gold-text">消费者洞察</h3>
+                    <div class="w-full max-w-2xl mx-auto">
+                        <h4 class="text-lg font-bold mb-4 text-center">消费动机分析</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>文化体验与认同</span>
+                                    <span>78%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>独特产品收藏</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>社交分享需求</span>
+                                    <span>52%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 52%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span>礼品赠送</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 竞争优势分析 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-6 text-center gold-text">竞争优势分析</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold mb-4">核心优势</h4>
+                            <div class="space-y-4">
+                                <div class="feature-card p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="p-2 rounded-full mr-4 gold-bg">
+                                            <i class="fas fa-map-marker-alt gold-text"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold">优越地理位置</h5>
+                                            <p class="text-sm">位于汤山旅游度假区核心，年游客量800万+</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="feature-card p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="p-2 rounded-full mr-4 gold-bg">
+                                            <i class="fas fa-lightbulb gold-text"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold">创新商业模式</h5>
+                                            <p class="text-sm">非遗+潮创融合，打造差异化体验</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="feature-card p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="p-2 rounded-full mr-4 gold-bg">
+                                            <i class="fas fa-hands-helping gold-text"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold">全方位运营支持</h5>
+                                            <p class="text-sm">提供营销、品牌、技术等全方位支持</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="feature-card p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-start">
+                                        <div class="p-2 rounded-full mr-4 gold-bg">
+                                            <i class="fas fa-award gold-text"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="font-bold">政策红利</h5>
+                                            <p class="text-sm">享受文化产业扶持政策与税收优惠</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-4">市场机会点</h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <h5 class="font-bold">文化消费升级</h5>
+                                    <p class="text-sm">消费者从物质消费转向体验式、文化型消费，非遗产品需求增长</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5 class="font-bold">国潮兴起</h5>
+                                    <p class="text-sm">年轻一代对传统文化认同感增强，推动非遗产品年轻化、时尚化</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5 class="font-bold">数字化机遇</h5>
+                                    <p class="text-sm">社交媒体和电商平台为非遗传播和销售开辟新渠道</p>
+                                </div>
+                                <div class="timeline-item">
+                                    <h5 class="font-bold">政策支持</h5>
+                                    <p class="text-sm">国家大力支持文化产业发展，非遗保护与传承成为重点</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 投资回报分析 -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-center gold-text">投资回报分析</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="data-card text-center">
+                            <div class="p-2 rounded-full mx-auto mb-4 gold-bg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-chart-line text-2xl gold-text"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">客单价提升</h4>
+                            <p class="text-sm">非遗产品平均客单价较普通文创产品高出35%</p>
+                        </div>
+                        <div class="data-card text-center">
+                            <div class="p-2 rounded-full mx-auto mb-4 gold-bg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-users text-2xl gold-text"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">复购率优势</h4>
+                            <p class="text-sm">非遗消费者忠诚度高，平均复购率提升42%</p>
+                        </div>
+                        <div class="data-card text-center">
+                            <div class="p-2 rounded-full mx-auto mb-4 gold-bg" style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-share-alt text-2xl gold-text"></i>
+                            </div>
+                            <h4 class="font-bold mb-2">社交传播效应</h4>
+                            <p class="text-sm">非遗体验社交分享率高，带来额外流量与转化</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 地理位置 -->
+    <section id="location" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">地理位置</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6">优越的地理位置</h3>
+                        
+                        <div class="location-highlight">
+                            <h4 class="font-bold mb-3 text-lg"><i class="fas fa-map-marker-alt mr-2 gold-text"></i>位于南京东郊</h4>
+                            <p class="text-lg">汤山位于南京市江宁区东北部，是南京的东大门，距离南京主城约20公里，距离猿人洞景区仅2公里，距离阳山碑材、矿坑公园景区约3公里。</p>
+                        </div>
+                        
+                        <div class="location-highlight">
+                            <h4 class="font-bold mb-3 text-lg"><i class="fas fa-globe-asia mr-2 gold-text"></i>处于宁镇扬中心区域</h4>
+                            <p class="text-lg">汤山距离上海240公里、杭州200公里，是南京连通上海、苏锡常等城市的重要枢纽之一，在宁镇扬一体化发展中具有重要的区位优势。</p>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-xl font-bold mb-6 gold-text">交通优势</h4>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="p-3 rounded-full mr-4 gold-bg">
+                                        <i class="fas fa-road text-xl gold-text"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg mb-2">公路交通发达</h4>
+                                        <p class="text-lg">汤山南有直通南京禄口国际机场的汤铜公路，北有直达新生圩港口的汤龙公路，沪宁高速公路和宁杭公路由西向东穿过，方便游客前往汤山旅游。</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="p-3 rounded-full mr-4 gold-bg">
+                                        <i class="fas fa-subway text-xl gold-text"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg mb-2">轨道交通便捷</h4>
+                                        <p class="text-lg">汤山紧邻南京地铁S6号线，进一步加强了汤山与南京主城区及周边地区的联系，为居民和游客的出行提供了便利。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="aspect-video flex items-center justify-center bg-gray-100 rounded-xl p-8 gold-border">
+                            <div class="text-center">
+                                <i class="fas fa-map-marked-alt text-6xl mb-6 gold-text"></i>
+                                <p class="text-xl font-semibold">江苏省南京市江宁区汤山街道迎宾路28号</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 展馆效果图 -->
+    <section id="gallery" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">展馆效果图</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="gallery-image" data-index="0">
+                        <div class="img-frame">
+                            <img src="https://space.coze.cn/s/I5BfZ8uEIYg/?width_height=878x525" alt="展馆内景图" class="w-full h-auto cursor-pointer">
+                        </div>
+                    </div>
+                    <div class="gallery-image" data-index="1">
+                        <div class="img-frame">
+                            <img src="https://space.coze.cn/s/bzLKNMIvQik/?width_height=630x416" alt="展馆内景图" class="w-full h-auto cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 图片模态框 -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="" class="max-w-full max-h-full">
+        </div>
+        <div class="modal-nav">
+            <button class="modal-nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="modal-nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 合作模式 -->
+    <section id="cooperation" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">合作模式</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <h3 class="text-2xl font-bold mb-8 text-center gold-text">一层文创/非遗类合作模式</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="feature-card">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 rounded-full mr-4 flex items-center justify-center gold-bg">
+                                <i class="fas fa-handshake text-2xl gold-text"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">联营模式</h4>
+                        </div>
+                        <div class="pl-18">
+                            <p class="mb-4 text-lg"><strong>合作方式：</strong>招商方提供场地、收银与营销，合作方供产品/服务，按营收分成</p>
+                            <p class="text-lg"><strong>适合对象：</strong>文创品牌、非遗工作室</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="flex items-center mb-6">
+                            <div class="w-14 h-14 rounded-full mr-4 flex items-center justify-center gold-bg">
+                                <i class="fas fa-users text-2xl gold-text"></i>
+                            </div>
+                            <h4 class="text-xl font-bold">合资模式</h4>
+                        </div>
+                        <div class="pl-18">
+                            <p class="mb-4 text-lg"><strong>合作方式：</strong>与非遗大师联合成立工作室，共同开发"汤山限定产品"，利润按协议约定分配</p>
+                            <p class="text-lg"><strong>适合对象：</strong>有核心技艺但缺运营能力的非遗团队</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 一楼小吃摊位招商 -->
+    <section id="food" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">一楼小吃摊位招商</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">特色小吃摊位</h3>
+                        <p class="mb-6 text-lg">
+                            我们现正招募特色小吃摊位入驻，为游客提供地道的南京美食体验。摊位面积适中，设施齐全，适合各类特色小吃经营。
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="tag gold-bg gold-text">南京特色</span>
+                            <span class="tag gold-bg gold-text">传统小吃</span>
+                            <span class="tag gold-bg gold-text">创新美食</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="img-frame">
+                            <img src="https://space.coze.cn/s/MxzwtaVmZCY/?width_height=1044x778" alt="一楼小吃摊位" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 商户保障板块 -->
+    <section class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">商户能获哪些保障？</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+                <p class="text-lg">统一营销支持</p>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="space-y-8">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4 gold-bg">
+                            <span class="gold-text font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">线上线下整合</h3>
+                            <p class="text-lg">
+                                运营抖音、小红书、公众号矩阵，代运营商户宣传；线下参与文旅博览会、非遗展，提升曝光。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4 gold-bg">
+                            <span class="gold-text font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">品牌打造</h3>
+                            <p class="text-lg">
+                                专业团队负责 "汤山非遗官宴" 整体品牌设计，投放全国性文旅媒体。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4 gold-bg">
+                            <span class="gold-text font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold mb-2">平台合作</h3>
+                            <p class="text-lg">
+                                与美团、抖音本地生活达成战略合作，推出优惠套餐，精准触达目标客群。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- 联系我们 -->
+    <section id="contact" class="section">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 gold-text">联系我们</h2>
+                <div class="divider" style="margin: 30px auto;"></div>
+            </div>
+            
+            <div class="card p-10 max-w-5xl mx-auto content-bg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">加入非遗潮创馆</h3>
+                        <p class="mb-6 text-lg">
+                            如果您是非遗传承人或拥有优质非遗产品，欢迎联系我们，共同探讨合作可能。
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="contact-item">
+                                <div class="flex items-start">
+                                    <div class="p-3 rounded-full mr-4 gold-bg">
+                                        <i class="fas fa-map-marker-alt text-xl gold-text"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">地址</h4>
+                                        <p class="text-lg">江苏省南京市江宁区汤山街道迎宾路28号</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="flex items-start">
+                                    <div class="p-3 rounded-full mr-4 gold-bg">
+                                        <i class="fas fa-user text-xl gold-text"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-lg">联系人</h4>
+                                        <p class="text-lg">
+                                            葛旺，电话：<a href="tel:13382053739" style="color: #333333; text-decoration: none; font-weight: bold;">13382053739</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="max-w-xs mx-auto mb-6">
+                            <div class="img-frame">
+                                <img src="https://space.coze.cn/s/DF4w1w-Ihj4/?width_height=1024x1024" alt="联系二维码" class="w-full h-auto">
+                            </div>
+                        </div>
+                        <p class="mb-2 text-lg">扫描二维码了解更多招商详情</p>
+                        <p class="text-lg">或直接到访展馆洽谈合作</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-8 bg-white gold-border">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-bold gold-text">玖捌贰·非遗潮创馆</h3>
+                    <p class="text-gray-600">传统非遗与现代潮流的完美融合</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+            
+            const icon = this.querySelector('i');
+            if (menu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                this.classList.add('bg-gold-300');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                this.classList.remove('bg-gold-300');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const menuIcon = document.querySelector('#mobileMenuBtn i');
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+
+        // 图片淡入动画
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const galleryObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 300);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        galleryImages.forEach(image => {
+            galleryObserver.observe(image);
+        });
+
+        // 图片模态框功能
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const closeBtn = document.querySelector('.close-btn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const images = [
+            { src: 'https://space.coze.cn/s/I5BfZ8uEIYg/?width_height=878x525', alt: '展馆内景图' },
+            { src: 'https://space.coze.cn/s/bzLKNMIvQik/?width_height=630x416', alt: '展馆内景图' }
+        ];
+        let currentIndex = 0;
+
+        // 打开模态框
+        galleryImages.forEach((image, index) => {
+            image.addEventListener('click', () => {
+                currentIndex = index;
+                updateModalImage();
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // 关闭模态框
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // 上一张
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateModalImage();
+        });
+
+        // 下一张
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateModalImage();
+        });
+
+        // 更新模态框图片
+        function updateModalImage() {
+            modalImg.src = images[currentIndex].src;
+            modalImg.alt = images[currentIndex].alt;
+        }
+
+        // 点击模态框外部关闭
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    updateModalImage();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    updateModalImage();
+                } else if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        // 金色粒子效果
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机大小
+                const size = Math.random() * 15 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // 随机位置
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * 5;
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // 初始化粒子效果
+        createParticles();
+
+        // 市场分析图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 市场趋势图表
+            const marketTrendCtx = document.getElementById('marketTrendChart').getContext('2d');
+            const marketTrendChart = new Chart(marketTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: '非遗消费市场规模(亿元)',
+                        data: [320, 380, 480, 580, 720, 850],
+                        borderColor: '#D4AF37',
+                        backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#D4AF37',
+                        pointBorderColor: '#FFFFFF',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14,
+                                    family: "'KaiTi', 'STKaiti', 'SimKai', serif"
+                                },
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: '市场规模(亿元)',
+                                font: {
+                                    size: 14,
+                                    family: "'KaiTi', 'STKaiti', 'SimKai', serif"
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0,0,0,0.05)'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
